@@ -9,16 +9,59 @@ var slice = Array.prototype.slice
 
 function init(imageContainer) {
 	var $lightbox = $.create('<div class="image-lightbox"></div>')
-	$(imageContainer || 'body').find('.image').on('click', function(event) {
+	var currentImage = -1
+	var $images = $(imageContainer || 'body').find('.image')
+	$(document).on('keyup', handleKeyDown)
+	$images.on('click', function(event) {
 		event.preventDefault()
 		var link = this
-		$lightbox.html('<img src="' + link.href + '">')
+		currentImage = $images.indexOf(link)
+		showCurrentImage()
 	})
 	$lightbox.appendTo(document.body)
+
+	function handleKeyDown(event) {
+		var esc = 27
+		var arrowLeft = 37
+		var arrowRight = 39
+		switch(event.keyCode) {
+			case esc:
+				closePopup()
+				break
+			case arrowLeft:
+				currentImage--
+				setNextImage()
+				break
+			case arrowRight:
+				currentImage++
+				setNextImage()
+				break
+			default:
+				return
+		}
+		event.preventDefault()
+	}
+
+	function closePopup() {
+		$lightbox.html('')
+	}
+
+	function setNextImage() {
+		if(currentImage < 0) currentImage = $images.length - 1
+		if(currentImage >= $images.length) currentImage = 0
+		showCurrentImage()
+	}
+
+	function showCurrentImage() {
+		link = $images[currentImage]
+		$lightbox.html('<img src="' + link.href + '">')
+	}
 }
 
 function $(selector, scope) {
-	var arr = (scope || document).querySelectorAll(selector)
+	var arr = typeof(selector) == 'string'
+		? (scope || document).querySelectorAll(selector)
+		:  [ selector ]
 	return extendArray(arr)
 }
 
