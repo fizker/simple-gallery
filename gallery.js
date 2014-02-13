@@ -29,11 +29,9 @@ function init(imageContainer) {
 				closePopup()
 				break
 			case arrowLeft:
-				currentImage--
-				setNextImage()
+				setPreviousImage()
 				break
 			case arrowRight:
-				currentImage++
 				setNextImage()
 				break
 			default:
@@ -46,22 +44,43 @@ function init(imageContainer) {
 		$lightbox.html('')
 	}
 
+	function setPreviousImage() {
+		currentImage--
+		showCurrentImage()
+	}
+
 	function setNextImage() {
-		if(currentImage < 0) currentImage = $images.length - 1
-		if(currentImage >= $images.length) currentImage = 0
+		currentImage++
 		showCurrentImage()
 	}
 
 	function showCurrentImage() {
+		if(currentImage < 0) currentImage = $images.length - 1
+		if(currentImage >= $images.length) currentImage = 0
+
 		link = $images[currentImage]
-		$lightbox.html('<img src="' + link.href + '">')
+
+		$lightbox.html(''
+			+ '<div class="image-container">'
+				+ '<button class="btn-close icon-close"></button>'
+				+ '<div>'
+					+ '<span class="btn-prev"><span class="icon-prev"></span></span>'
+					+ '<img src="' + link.href + '">'
+					+ '<span class="btn-next"><span class="icon-next"></span></span>'
+				+ '</div>'
+				+ '<a class="btn-download" href="' + link.href + '"><span class="icon-download"></span> download</a>'
+			+ '</div>'
+		)
+		$lightbox.find('.btn-close').on('click', closePopup)
+		$lightbox.find('.btn-prev').on('click', setPreviousImage)
+		$lightbox.find('.btn-next').on('click', setNextImage)
 	}
 }
 
 function $(selector, scope) {
 	var arr = typeof(selector) == 'string'
 		? (scope || document).querySelectorAll(selector)
-		:  [ selector ]
+		: [ selector ]
 	return extendArray(arr)
 }
 

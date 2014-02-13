@@ -46,6 +46,62 @@
 	justify-content: center;
 }
 
+.image-lightbox button {
+	border: 0;
+	background: transparent;
+}
+
+.image-container {
+	position: relative;
+	padding: 0 50px;
+}
+
+.btn-prev,
+.btn-next,
+.btn-close
+{
+	font-size: 40pt;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: white;
+	cursor: pointer;
+}
+
+.btn-prev:hover,
+.btn-next:hover,
+.btn-close:hover
+{
+	color: grey;
+}
+
+.btn-prev span,
+.btn-next span
+{
+	position: absolute;
+	top: 50%;
+	margin-top: -25px;
+	right: 0;
+}
+
+.btn-close {
+	bottom: auto;
+	left: auto;
+	z-index: 1;
+}
+
+.btn-prev {
+	right: auto;
+	width: 50px;
+}
+
+.btn-next {
+	left: 50px;
+	text-align: right;
+}
+
 /* Icon font stuff */
 
 @font-face {
