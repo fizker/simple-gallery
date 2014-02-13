@@ -71,6 +71,20 @@ function init(imageContainer) {
 				+ '<a class="btn-download" href="' + link.href + '"><span class="icon-download"></span> download</a>'
 			+ '</div>'
 		)
+		$lightbox.find('img').on('load', function(event) {
+			var img = event.target
+			// The constants here are for padding and such
+			var availableSize =
+				{ width: document.body.scrollWidth - 100
+				, height: document.body.scrollHeight - 20
+				}
+			var factors =
+				{ width: availableSize.width / img.width
+				, height: availableSize.height / img.height
+				}
+			var factor = Math.min(1, factors.width, factors.height)
+			img.width *= factor
+		})
 		$lightbox.find('.btn-close').on('click', closePopup)
 		$lightbox.find('.btn-prev').on('click', setPreviousImage)
 		$lightbox.find('.btn-next').on('click', setNextImage)
