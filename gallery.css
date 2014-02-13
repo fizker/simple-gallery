@@ -1,0 +1,17 @@
+.image {
+	display: inline-block;
+	position: relative;
+	width: 100px;
+	height: 100px;
+}
+
+.image img {
+	position: absolute;
+	top: 0;
+}
+
+.image:hover img {
+	width: 200%;
+	margin-left: -50%;
+	z-index: 1;
+}
