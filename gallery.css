@@ -45,3 +45,43 @@
 	-ms-justify-content: center;
 	justify-content: center;
 }
+
+/* Icon font stuff */
+
+@font-face {
+	font-family: 'gallery';
+	src:url('icons/gallery.eot?-3fuzxr');
+	src:url('icons/gallery.eot?#iefix-3fuzxr') format('embedded-opentype'),
+		url('icons/gallery.woff?-3fuzxr') format('woff'),
+		url('icons/gallery.ttf?-3fuzxr') format('truetype'),
+		url('icons/gallery.svg?-3fuzxr#gallery') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'gallery';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-next:before {
+	content: "\e600";
+}
+.icon-prev:before {
+	content: "\e601";
+}
+.icon-download:before {
+	content: "\e602";
+}
+.icon-close:before {
+	content: "\e603";
+}
